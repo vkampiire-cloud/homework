@@ -1,17 +1,3 @@
-"""
-Homework Assignment: Query the Reddit API
-==========================================
-Collect the following information for a subreddit:
-  1. The subreddit name
-  2. The subreddit description
-  3. Number of subscribers (subs)
-  4. The subreddit rules
-  5. The 10 newest posts
-
-Requirements:
-  - Use Python's `requests` library.
-  - Set a custom, descriptive User-Agent header according to Reddit API rules.
-"""
 
 import requests
 
