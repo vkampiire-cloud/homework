@@ -1,16 +1,12 @@
 
 import requests
-
-
 def get_subreddit_info(subreddit_name: str):
     """
     Queries Reddit's public API to retrieve and display information
     about the specified subreddit.
     """
-    # --------------------------------------------------------------------------
     # REQUIREMENT: Set an appropriate custom User-Agent header
     # Format required by Reddit: <platform>:<app ID>:<version> (by /u/<username>)
-    # --------------------------------------------------------------------------
     headers = {
         "User-Agent": "windows:homework_subreddit_query:v1.0 (by /u/student_dev)"
     }
@@ -18,11 +14,8 @@ def get_subreddit_info(subreddit_name: str):
     print("=" * 60)
     print(f"QUERYING REDDIT API FOR: r/{subreddit_name}")
     print("=" * 60)
-
-    # ==========================================================================
     # 1. SUBREDDIT NAME, DESCRIPTION, AND NUMBER OF SUBS
     # Endpoint: https://www.reddit.com/r/{subreddit}/about.json
-    # ==========================================================================
     about_url = f"https://www.reddit.com/r/{subreddit_name}/about.json"
     about_response = requests.get(about_url, headers=headers, allow_redirects=False)
 
@@ -45,11 +38,8 @@ def get_subreddit_info(subreddit_name: str):
         print(f"    - Description:    {description.strip()[:200]}...")
     else:
         print(f"\n[-] Could not fetch about.json (Status Code: {about_response.status_code})")
-
-    # ==========================================================================
     # 2. SUBREDDIT RULES
     # Endpoint: https://www.reddit.com/r/{subreddit}/about/rules.json
-    # ==========================================================================
     rules_url = f"https://www.reddit.com/r/{subreddit_name}/about/rules.json"
     rules_response = requests.get(rules_url, headers=headers, allow_redirects=False)
 
@@ -64,11 +54,8 @@ def get_subreddit_info(subreddit_name: str):
             print("    No rules found for this subreddit.")
     else:
         print(f"\n[-] Could not fetch rules.json (Status Code: {rules_response.status_code})")
-
-    # ==========================================================================
     # 3. 10 NEWEST POSTS
     # Endpoint: https://www.reddit.com/r/{subreddit}/new.json?limit=10
-    # ==========================================================================
     new_posts_url = f"https://www.reddit.com/r/{subreddit_name}/new.json"
     params = {"limit": 10}
     posts_response = requests.get(new_posts_url, headers=headers, params=params, allow_redirects=False)
